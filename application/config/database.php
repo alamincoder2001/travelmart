@@ -8,13 +8,13 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	
-	'username' => 'bigektuw_travel_mart',
-	'password' => 'QSAstXdoD]M9',
-	'database' => 'bigektuw_travelmartusa',
+	// 'username' => 'bigektuw_travel_mart',
+	// 'password' => 'QSAstXdoD]M9',
+	// 'database' => 'bigektuw_travelmartusa',
 	
-// 	'username' => 'root',
-// 	'password' => '',
-// 	'database' => 'travel_mart',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'bigektuw_travelmartusa',
 		
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
