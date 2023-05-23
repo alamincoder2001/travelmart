@@ -175,7 +175,7 @@ class Products extends CI_Controller {
             left join tbl_productcategory pc on pc.ProductCategory_SlNo = p.ProductCategory_ID
             where p.status = 'a'
             $clauses
-            order by p.Product_SlNo desc
+            order by p.Product_Name asc
         ")->result();
 
         echo json_encode($products);

@@ -395,7 +395,7 @@ class Supplier extends CI_Controller {
             from tbl_supplier
             where Status = 'a'
             and Supplier_brinchid = ? or Supplier_brinchid = 0
-            order by Supplier_SlNo desc
+            order by Supplier_Name asc
         ", $this->session->userdata('BRANCHid'))->result();
 
         echo json_encode($suppliers);

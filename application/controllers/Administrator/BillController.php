@@ -625,7 +625,7 @@ class BillController extends CI_Controller
             where bm.branch_id = '$branchId'
             and bm.status = 'a'
             $clauses
-            order by bm.id desc
+            order by bm.date asc
         ")->result();
 
         foreach($bills as $bill){
@@ -914,6 +914,7 @@ class BillController extends CI_Controller
             from tbl_billdetails bd
             where bd.status = 'a'
             group by bd.pnr_no
+            order by bd.pnr_no asc
         ")->result();
 
         echo json_encode($pnrs);

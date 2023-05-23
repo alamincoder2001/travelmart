@@ -40,7 +40,7 @@ class Page extends CI_Controller {
     // Product Category 
 
     public function getCategories(){
-        $categories = $this->db->query("select * from tbl_productcategory where status = 'a'")->result();
+        $categories = $this->db->query("select * from tbl_productcategory where status = 'a' order by ProductCategory_Name asc")->result();
         echo json_encode($categories);
     }
 

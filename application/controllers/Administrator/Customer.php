@@ -52,7 +52,7 @@ class Customer extends CI_Controller
             left join tbl_district d on d.District_SlNo = c.area_ID
             where c.status = 'a'
             and (c.Customer_brunchid = ? or c.Customer_brunchid = 0)
-            order by c.Customer_SlNo desc
+            order by c.Customer_Name asc
         ", $this->session->userdata('BRANCHid'))->result();
         echo json_encode($customers);
     }
