@@ -96,25 +96,25 @@
                             <div class="form-group clearfix" style="display: none;" :style="{display: client.display_name == 'New Client' ? '' : 'none' }">
                                 <label class="control-label col-md-4">Client Name</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="client.Customer_Name" required />
+                                    <input type="text" class="form-control" v-model="client.Customer_Name" required autocomplete="off"/>
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Client Phone</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="client.Customer_Mobile" v-bind:disabled="client.display_name == 'New Client' ? false : true" />
+                                    <input type="text" class="form-control" v-model="client.Customer_Mobile" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off"/>
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Client Email</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="client.Customer_Email" v-bind:disabled="client.display_name == 'New Client' ? false : true" />
+                                    <input type="text" class="form-control" v-model="client.Customer_Email" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off"/>
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Client Address</label>
                                 <div class="col-md-7">
-                                    <textarea class="form-control" class="form-control" v-model="client.Customer_Address" cols="30" rows="2" v-bind:disabled="client.display_name == 'New Client' ? false : true"></textarea>
+                                    <textarea class="form-control" class="form-control" v-model="client.Customer_Address" cols="30" rows="2" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -148,25 +148,25 @@
                             <div class="form-group clearfix" style="display: none;" :style="{display: supplier.display_name == 'New Supplier' ? '' : 'none' }">
                                 <label class="control-label col-md-4">Supplier Name</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="supplier.Supplier_Name" required />
+                                    <input type="text" class="form-control" v-model="supplier.Supplier_Name" autocomplete="off" required />
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Supplier Phone</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="supplier.Supplier_Mobile" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" />
+                                    <input type="text" class="form-control" v-model="supplier.Supplier_Mobile" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off"/>
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Supplier Email</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="supplier.Supplier_Email" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" />
+                                    <input type="text" class="form-control" v-model="supplier.Supplier_Email" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off"/>
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Supplier Address</label>
                                 <div class="col-md-7">
-                                    <textarea class="form-control" v-model="supplier.Supplier_Address" cols="30" rows="2" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true"></textarea>
+                                    <textarea class="form-control" v-model="supplier.Supplier_Address" cols="30" rows="2" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -220,7 +220,7 @@
                                 <div class="form-group">
                                     <label for="name" class="col-xs-4 control-label no-padding-right">Name </label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="name" class="form-control" v-model="route.name" placeholder="Enter name" required />
+                                        <input type="text" id="name" class="form-control" v-model="route.name" placeholder="Enter name" autocomplete="off" required />
                                     </div>
                                 </div>
                                 <!-- <div class="form-group">
@@ -232,7 +232,7 @@
                                 <div class="form-group">
                                     <label for="phone" class="col-xs-4 control-label no-padding-right"> Phone Number </label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="phone" class="form-control" v-model="route.phone" placeholder="Enter phone" required />
+                                        <input type="text" id="phone" class="form-control" v-model="route.phone" placeholder="Enter phone" autocomplete="off" required />
                                     </div>
                                 </div>
                             </div>
@@ -271,31 +271,31 @@
                                 <div class="form-group">
                                     <label for="pnr_no" class="col-xs-4 control-label no-padding-right">PNR NO</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="pnr_no" class="form-control" v-model="route.pnr_no" />
+                                        <input type="text" id="pnr_no" class="form-control" v-model="route.pnr_no" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="flight_no" class="col-xs-4 control-label no-padding-right">Flight NO</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="flight_no" class="form-control" v-model="route.flight_no" />
+                                        <input type="text" id="flight_no" class="form-control" v-model="route.flight_no" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="supplier_fair" class="col-xs-4 control-label no-padding-right no-padding-right">Supplier Fair</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="supplier_fair" class="form-control" v-model="route.Product_Purchase_Rate" required />
+                                        <input type="text" id="supplier_fair" class="form-control" v-model="route.Product_Purchase_Rate" required autocomplete="off"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="supplier_tax" class="col-xs-4 control-label no-padding-right no-padding-right">Supplier Tax</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="supplier_tax" class="form-control" v-model="route.tax" />
+                                        <input type="text" id="supplier_tax" class="form-control" v-model="route.supplier_tax" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="sales_amount" class="col-xs-4 control-label no-padding-right">Sale Amount</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="sales_amount" class="form-control" v-model="route.Product_SellingPrice" required />
+                                        <input type="text" id="sales_amount" class="form-control" v-model="route.Product_SellingPrice" required autocomplete="off"/>
                                     </div>
                                 </div>
                             </div>
@@ -303,14 +303,14 @@
                                 <div class="form-group">
                                     <label for="ticket_no" class="col-xs-4 control-label no-padding-right">Ticket No</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="ticket_no" class="form-control" v-model="route.ticket" required />
+                                        <input type="text" id="ticket_no" class="form-control" v-model="route.ticket" required autocomplete="off"/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tax" class="col-xs-4 control-label no-padding-right">Tax In BDT</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="tax" class="form-control" v-model="route.tax_amount" />
+                                        <input type="text" id="tax" class="form-control" v-model="route.tax_amount" autocomplete="off"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -318,11 +318,11 @@
                                     <div class="col-xs-8">
                                         <div class="row">
                                             <div class="col-xs-4">
-                                                <input type="number" min="0" id="routeDiscount" class="form-control" v-model="routeDiscount" v-on:input="calculateDiscount" />
+                                                <input type="number" min="0" id="routeDiscount" class="form-control" v-model="routeDiscount" v-on:input="calculateDiscount" autocomplete="off"/>
                                             </div>
                                             <label class="col-xs-2 control-label">%</label>
                                             <div class="col-xs-6">
-                                                <input type="number" min="0" id="discount" class="form-control" v-model="route.discount" v-on:input="calculateDiscount" />
+                                                <input type="number" min="0" id="discount" class="form-control" v-model="route.discount" v-on:input="calculateDiscount" autocomplete="off"/>
                                             </div>
                                         </div>
                                     </div>
@@ -348,6 +348,7 @@
                                         <th style="width:10%;color:#000;">PNR NO</th>
                                         <th style="width:10%;color:#000;">Ticket</th>
                                         <th style="width:12%;color:#000;">Pur. Rate</th>
+                                        <th style="width:12%;color:#000;">Supp. Tax</th>
                                         <th style="width:15%;color:#000;">Sale Amount</th>
                                         <th style="width:8%;color:#000;">Tax</th>
                                         <th style="width:7%;color:#000;">Discount</th>
@@ -362,6 +363,7 @@
                                         <td>{{ item.pnr_no }}</td>
                                         <td>{{ item.ticket }}</td>
                                         <td>{{ item.purRate }}</td>
+                                        <td>{{ item.supplier_tax }}</td>
                                         <td>{{ item.saleRate }}</td>
                                         <td>{{ item.taxAmount }}</td>
                                         <td>{{ item.discount }}</td>
@@ -372,13 +374,13 @@
                                     </tr>
 
                                     <tr style="font-weight: bold;">
-                                        <td colspan="4">Note</td>
+                                        <td colspan="5">Note</td>
                                         <td colspan="3">Total Tax</td>
                                         <td colspan="3">Total</td>
                                     </tr>
 
                                     <tr>
-                                        <td colspan="4"><textarea style="width: 100%;font-size:13px;" placeholder="Note" v-model="bill.note"></textarea></td>
+                                        <td colspan="5"><textarea style="width: 100%;font-size:13px;" placeholder="Note" v-model="bill.note"></textarea></td>
                                         <td colspan="3" style="padding-top: 15px;font-size:18px;">{{ cart.reduce((prev, curr) => { return prev + parseFloat(curr.taxAmount)}, 0) }} </td>
                                         <td colspan="3" style="padding-top: 15px;font-size:18px;">{{ bill.total }}</td>
                                     </tr>
@@ -392,7 +394,7 @@
                             <div class="form-group">
                                 <label for="service" class="col-xs-4 control-label no-padding-right">Other Service</label>
                                 <div class="col-xs-8">
-                                    <textarea id="service" v-model="bill.other_service" class="form-control" cols="30" rows="2"></textarea>
+                                    <textarea id="service" v-model="bill.other_service" class="form-control" cols="30" rows="2" autocomplete="off"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -400,7 +402,7 @@
                             <div class="form-group">
                                 <label for="service_amount" class="col-xs-4 control-label no-padding-right">Service Amount</label>
                                 <div class="col-xs-8">
-                                    <input type="number" min="0" step="0.01" id="service_amount" class="form-control" v-model="bill.service_amount" v-on:input="calculateTotal" />
+                                    <input type="number" min="0" step="0.01" id="service_amount" class="form-control" v-model="bill.service_amount" v-on:input="calculateTotal" autocomplete="off"/>
                                 </div>
                             </div>
                         </div>
@@ -475,13 +477,13 @@
                                             <div class="form-group">
                                                 <label class="col-xs-12 control-label no-padding-right">Discount Persent</label>
 
-                                                <div class="col-xs-4">
+                                                <div class="col-xs-5">
                                                     <input type="number" min="0" id="discountPercent" class="form-control" v-model="discountPercent" v-on:input="calculateTotal" />
                                                 </div>
 
                                                 <label class="col-xs-1 control-label no-padding-right">%</label>
 
-                                                <div class="col-xs-7">
+                                                <div class="col-xs-6">
                                                     <input type="number" min="0" id="discount" class="form-control" v-model="bill.discount" v-on:input="calculateTotal" />
                                                 </div>
 
@@ -636,6 +638,7 @@
                     Product_Purchase_Rate: 0.00,
                     Product_SellingPrice: 0.00,
                     tax_amount: 0.00,
+                    supplier_tax: 0.00,
                     discount: 0.00
                 },
 
@@ -807,24 +810,25 @@
                 }
 
                 let route = {
-                    routeId: this.route.Product_SlNo,
+                    routeId  : this.route.Product_SlNo,
                     routeName: this.route.Product_Name,
                     airlineId: this.airline.ProductCategory_SlNo,
-                    airline: this.airline.ProductCategory_Name,
-                    name: this.route.name,
-                    phone: this.route.phone,
+                    airline  : this.airline.ProductCategory_Name,
+                    name     : this.route.name,
+                    phone    : this.route.phone,
                     // address: this.route.address,
-                    issue_date: this.route.issue_date,
-                    flight_date: this.route.flight_date,
+                    issue_date   : this.route.issue_date,
+                    flight_date  : this.route.flight_date,
                     reminder_date: this.route.reminder_date,
-                    return_date: this.route.return_date,
-                    pnr_no: this.route.pnr_no,
-                    ticket: this.route.ticket,
-                    flight_no: this.route.flight_no,
-                    purRate: this.route.Product_Purchase_Rate,
-                    saleRate: this.route.Product_SellingPrice,
-                    taxAmount: this.route.tax_amount,
-                    discount: this.route.discount,
+                    return_date  : this.route.return_date,
+                    pnr_no       : this.route.pnr_no,
+                    ticket       : this.route.ticket,
+                    flight_no    : this.route.flight_no,
+                    purRate      : this.route.Product_Purchase_Rate,
+                    saleRate     : this.route.Product_SellingPrice,
+                    taxAmount    : this.route.tax_amount,
+                    supplier_tax : this.route.supplier_tax,
+                    discount     : this.route.discount,
                 }
 
                 let cartInd = this.cart.findIndex(r => r.pnr_no != route.pnr_no);
@@ -834,7 +838,6 @@
                 }
 
                 this.cart.push(route);
-                console.log(this.cart);
                 this.clearCart();
                 this.calculateTotal();
 
@@ -885,9 +888,11 @@
                 }
 
                 if (event.target.id == 'discountPercent') {
-                    this.bill.discount = ((parseFloat(this.bill.subTotal) * parseFloat(this.discountPercent)) / 100).toFixed(2);
+                    let total = this.cart.reduce((acc, pre) => {return acc + +pre.saleRate}, 0);
+                    this.bill.discount = ((parseFloat(total) * parseFloat(this.discountPercent)) / 100).toFixed(2);
                 } else {
-                    this.discountPercent = (parseFloat(this.bill.discount) / parseFloat(this.bill.subTotal) * 100).toFixed(2);
+                    let total = this.cart.reduce((acc, pre) => {return acc + +pre.saleRate}, 0);
+                    this.discountPercent = (parseFloat(this.bill.discount) / parseFloat(total) * 100).toFixed(2);
                 }
 
                 this.bill.total = parseFloat((+this.bill.subTotal + +this.bill.service_amount + +this.bill.vat) - +this.bill.discount).toFixed(2)
@@ -1025,6 +1030,7 @@
                                     ticket: route.ticket,
                                     flight_no: route.flight_no,
                                     purRate: route.purchase_rate,
+                                    supplier_tax: route.supplier_tax,
                                     saleRate: route.sale_rate,
                                     taxAmount: route.tax_amount,
                                     discount: route.discount,

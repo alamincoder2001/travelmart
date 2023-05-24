@@ -106,13 +106,13 @@
 							<!-- <td style="text-align:right;">{{ product.SaleDetails_TotalQuantity }}</td> -->
 							<td style="text-align:right;">{{ product.purchase_rate | decimal }}</td>
 							<td style="text-align:right;">{{ product.purchased_amount | decimal }}</td>
-							<td style="text-align:right;">{{ product.sale_rate | decimal }}</td>
+							<td style="text-align:right;">{{ product.sold_amount | decimal }}</td>
 							<td style="text-align:right;">{{ product.profit_loss | decimal }}</td>
 						</tr>
 						<tr style="background-color: #f0f0f0;font-weight: bold;">
 							<td colspan="3" style="text-align:right;">Total</td>
 							<td style="text-align:right;">{{ data.billDetails.reduce((prev, cur) => { return prev + parseFloat(cur.purchased_amount) }, 0) | decimal }}</td>
-							<td style="text-align:right;">{{ data.billDetails.reduce((prev, cur) => { return prev + parseFloat(cur.sale_rate) }, 0) | decimal }}</td>
+							<td style="text-align:right;">{{ data.billDetails.reduce((prev, cur) => { return prev + parseFloat(cur.sold_amount) }, 0) | decimal }}</td>
 							<td style="text-align:right;">{{ data.billDetails.reduce((prev, cur) => { return prev + parseFloat(cur.profit_loss) }, 0) | decimal }}</td>
 						</tr>
 					</tbody>
@@ -129,7 +129,7 @@
 							<td style="text-align:right;">
 								{{ 
 									reportData.reduce((prev, cur) => { return prev + parseFloat(
-										cur.billDetails.reduce((p, c) => { return p + parseFloat(c.sale_rate) }, 0)
+										cur.billDetails.reduce((p, c) => { return p + parseFloat(c.sold_amount) }, 0)
 									)}, 0).toFixed(2)
 								}}
 							</td>

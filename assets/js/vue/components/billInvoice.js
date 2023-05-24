@@ -51,22 +51,22 @@ const billInvoice = Vue.component('bill-invoice', {
                             <thead>
                                 <tr>
                                     <td>SL</td>
+                                    <td>PNR NO</td>
+                                    <td>Ticket</td>
                                     <td>Name</td>
                                     <td>Airline</td>
                                     <td>Route</td>
-                                    <td>PNR NO</td>
-                                    <td>Ticket</td>
                                     <td>Fare</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(route, sl) in cart">
                                     <td>{{ sl + 1 }}</td>
+                                    <td>{{ route.pnr_no }}</td>
+                                    <td>{{ route.ticket }}</td>
                                     <td>{{ route.name }}</td>
                                     <td>{{ route.ProductCategory_Name }}</td>
                                     <td>{{ route.Product_Name }}</td>
-                                    <td>{{ route.pnr_no }}</td>
-                                    <td>{{ route.ticket }}</td>
                                     <td style="text-align:right">{{ route.sale_rate }}</td>
                                 </tr>
                                 <tr v-if="bills.service_amount > 0">

@@ -169,6 +169,7 @@ class Products extends CI_Controller {
         $products = $this->db->query("
             select
                 p.*,
+                0 as supplier_tax,
                 concat(p.Product_Name, ' - ', p.Product_Code) as display_text,
                 pc.ProductCategory_Name
             from tbl_product p

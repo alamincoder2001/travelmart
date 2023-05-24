@@ -261,26 +261,26 @@ class BillController extends CI_Controller
 
 			// Bill master data insert
 			$bill = array(
-				'date' =>  $data->bill->date,
-				'invoice' => $invoice,
-				'mr_no' => $data->bill->mr_no,
-				'client_id' => $clientId,
-				'supplier_id' => $supplierId,
-				'sub_total' => $data->bill->subTotal,
+				'date'           => $data->bill->date,
+				'invoice'        => $invoice,
+				'mr_no'          => $data->bill->mr_no,
+				'client_id'      => $clientId,
+				'supplier_id'    => $supplierId,
+				'sub_total'      => $data->bill->subTotal,
 				'purchase_total' => $data->bill->purchase_total,
-				'vat' => $data->bill->vat,
-				'discount' => $data->bill->discount,
-				'total' => $data->bill->total,
-				'paid' => $data->bill->paid,
-				'due' => $data->bill->due,
-				'previous_due' => $data->bill->previous_due,
-				'note' => $data->bill->note,
-				'other_service' => $data->bill->other_service,
+				'vat'            => $data->bill->vat,
+				'discount'       => $data->bill->discount,
+				'total'          => $data->bill->total,
+				'paid'           => $data->bill->paid,
+				'due'            => $data->bill->due,
+				'previous_due'   => $data->bill->previous_due,
+				'note'           => $data->bill->note,
+				'other_service'  => $data->bill->other_service,
 				'service_amount' => $data->bill->service_amount,
-				'status' => 'a',
-				'added_by' => $this->session->userdata("FullName"),
-				'added_time' => date('Y-m-d H:i:s'),
-				'branch_id' => $this->session->userdata('BRANCHid')
+				'status'         => 'a',
+				'added_by'       => $this->session->userdata("FullName"),
+				'added_time'     => date('Y-m-d H:i:s'),
+				'branch_id'      => $this->session->userdata('BRANCHid')
 			);
 
 			$this->db->insert('tbl_billmaster', $bill);
@@ -292,13 +292,13 @@ class BillController extends CI_Controller
 
                 if($cartItem->routeId == 'R01' || $cartItem->routeId == '') {
                     $route = array(
-                        'Product_Code' => $this->mt->generateProductCode(),
-                        'Product_Name' => $cartItem->routeName,
+                        'Product_Code'       => $this->mt->generateProductCode(),
+                        'Product_Name'       => $cartItem->routeName,
                         'ProductCategory_ID' => $cartItem->airlineId,
-                        'status' => 'a',
-                        'AddBy' => $this->session->userdata("FullName"),
-                        'AddTime' => date('Y-m-d H:i:s'),
-                        'Product_branchid' => $this->session->userdata('BRANCHid')
+                        'status'             => 'a',
+                        'AddBy'              => $this->session->userdata("FullName"),
+                        'AddTime'            => date('Y-m-d H:i:s'),
+                        'Product_branchid'   => $this->session->userdata('BRANCHid')
                     );
 
                     $this->db->insert('tbl_product', $route);
@@ -313,23 +313,24 @@ class BillController extends CI_Controller
                     'name' => $cartItem->name,
                     'phone' => $cartItem->phone,
                     // 'address' => $cartItem->address,
-                    'airline_id' => $cartItem->airlineId,
-                    'route_id' => $routeId,
-                    'issue_date' => $cartItem->issue_date,
-                    'flight_date' => $cartItem->flight_date,
+                    'airline_id'    => $cartItem->airlineId,
+                    'route_id'      => $routeId,
+                    'issue_date'    => $cartItem->issue_date,
+                    'flight_date'   => $cartItem->flight_date,
                     'reminder_date' => $cartItem->reminder_date ?? '',
-                    'return_date' => $cartItem->return_date,
-                    'pnr_no' => $cartItem->pnr_no ?? '',
-                    'ticket' => $cartItem->ticket,
-                    'flight_no' => $cartItem->flight_no,
+                    'return_date'   => $cartItem->return_date,
+                    'pnr_no'        => $cartItem->pnr_no ?? '',
+                    'ticket'        => $cartItem->ticket,
+                    'flight_no'     => $cartItem->flight_no,
                     'purchase_rate' => $cartItem->purRate,
-                    'sale_rate' => $cartItem->saleRate,
-                    'tax_amount' => $cartItem->taxAmount,
-                    'discount' => $cartItem->discount,
-                    'status' => 'a',
-                    'added_by' => $this->session->userdata("FullName"),
-                    'added_time' => date('Y-m-d H:i:s'),
-                    'branch_id' => $this->session->userdata('BRANCHid')
+                    'supplier_tax'  => $cartItem->supplier_tax,
+                    'sale_rate'     => $cartItem->saleRate,
+                    'tax_amount'    => $cartItem->taxAmount,
+                    'discount'      => $cartItem->discount,
+                    'status'        => 'a',
+                    'added_by'      => $this->session->userdata("FullName"),
+                    'added_time'    => date('Y-m-d H:i:s'),
+                    'branch_id'     => $this->session->userdata('BRANCHid')
                 );
     
                 $this->db->insert('tbl_billdetails', $billDetails);
@@ -478,6 +479,7 @@ class BillController extends CI_Controller
                     'ticket' => $cartItem->ticket,
                     'flight_no' => $cartItem->flight_no,
                     'purchase_rate' => $cartItem->purRate,
+                    'supplier_tax'  => $cartItem->supplier_tax,
                     'sale_rate' => $cartItem->saleRate,
                     'tax_amount' => $cartItem->taxAmount,
                     'discount' => $cartItem->discount,
@@ -770,8 +772,9 @@ class BillController extends CI_Controller
                     bd.*,
                     p.Product_Code,
                     p.Product_Name,
-                    (bd.purchase_rate) as purchased_amount,
-                    (select bd.sale_rate - purchased_amount) as profit_loss
+                    (bd.purchase_rate + bd.supplier_tax) as purchased_amount,
+                    (bd.sale_rate + bd.tax_amount) as sold_amount,
+                    (select sold_amount - purchased_amount) as profit_loss
                 from tbl_billdetails bd 
                 join tbl_product p on p.Product_SlNo = bd.route_id
                 where bd.billmaster_id = ?

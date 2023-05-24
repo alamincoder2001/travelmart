@@ -152,6 +152,8 @@
 							<th>Issue Date</th>
 							<th>Flight Date</th>
 							<th>Return Date</th>
+							<th>Supplier Tax</th>
+							<th>Customer Tax</th>
 							<th>Price</th>
 							<th>Action</th>
 						</tr>
@@ -172,6 +174,8 @@
 								<td>{{ bill.billDetails[0].issue_date }}</td>
 								<td>{{ bill.billDetails[0].flight_date }}</td>
 								<td>{{ bill.billDetails[0].return_date }}</td>
+								<td style="text-align:right;">{{ bill.billDetails[0].supplier_tax }}</td>
+								<td style="text-align:right;">{{ bill.billDetails[0].tax_amount }}</td>
 								<td style="text-align:right;">{{ bill.billDetails[0].sale_rate }}</td>
 								<td style="text-align:center;">
 									<a href="" title="Bill Invoice" v-bind:href="`/bill-invoice-print/${bill.id}`" target="_blank"><i class="fa fa-file"></i></a>
@@ -197,12 +201,12 @@
 							</tr>
 							<tr>
 								<td colspan="4"></td>
-								<td colspan="8"><strong>Other Service: </strong>{{ bill.other_service ?? '-' }}</td>
+								<td colspan="10"><strong>Other Service: </strong>{{ bill.other_service ?? '-' }}</td>
 								<td colspan="2" style="text-align:right;">{{ bill.service_amount }}</td>
 								<td></td>
 							</tr>
 							<tr style="font-weight:bold;">
-								<td colspan="12" style="font-weight:normal;"><strong>Note: </strong>{{ bill.note }}</td>
+								<td colspan="14" style="font-weight:normal;"><strong>Note: </strong>{{ bill.note }}</td>
 								<td style="text-align:right;" colspan="2">
 									Total: {{ bill.total }}<br>
 									Paid: {{ bill.paid }}<br>
@@ -540,11 +544,6 @@
 						this.bills = res.data;
 					} else {
 						this.bills = res.data.bills;
-					}
-				})
-				.catch(error => {
-					if(error.response){
-						alert(`${error.response.status}, ${error.response.statusText}`);
 					}
 				})
             },
