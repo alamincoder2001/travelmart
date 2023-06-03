@@ -96,19 +96,19 @@
                             <div class="form-group clearfix" style="display: none;" :style="{display: client.display_name == 'New Client' ? '' : 'none' }">
                                 <label class="control-label col-md-4">Client Name</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="client.Customer_Name" required autocomplete="off"/>
+                                    <input type="text" class="form-control" v-model="client.Customer_Name" required autocomplete="off" />
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Client Phone</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="client.Customer_Mobile" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off"/>
+                                    <input type="text" class="form-control" v-model="client.Customer_Mobile" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Client Email</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="client.Customer_Email" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off"/>
+                                    <input type="text" class="form-control" v-model="client.Customer_Email" v-bind:disabled="client.display_name == 'New Client' ? false : true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="form-group clearfix">
@@ -154,13 +154,13 @@
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Supplier Phone</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="supplier.Supplier_Mobile" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off"/>
+                                    <input type="text" class="form-control" v-model="supplier.Supplier_Mobile" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="form-group clearfix">
                                 <label class="control-label col-md-4">Supplier Email</label>
                                 <div class="col-md-7">
-                                    <input type="text" class="form-control" v-model="supplier.Supplier_Email" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off"/>
+                                    <input type="text" class="form-control" v-model="supplier.Supplier_Email" v-bind:disabled="supplier.display_name == 'New Supplier' ? false : true" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="form-group clearfix">
@@ -211,12 +211,12 @@
                                         <a href="<?= base_url('product') ?>" class="btn btn-xs btn-danger" style="height: 25px; border: 0; width: 27px; margin-left: -10px;" target="_blank" title="Add New Product"><i class="fa fa-plus" aria-hidden="true" style="margin-top: 5px;"></i></a>
                                     </div>
                                 </div>
-                                <!-- <div class="form-group clearfix" style="display: none;" :style="{display: route.Product_Name == 'New Route' ? '' : 'none' }">
-                                    <label class="control-label col-md-4">Route Name</label>
-                                    <div class="col-md-8 no-padding-right">
+                                <div class="form-group clearfix" style="display: none;" :style="{display: route.Product_SlNo == 'R01' ? '' : 'none' }">
+                                    <label class="col-xs-4 control-label no-padding-right">Route Name</label>
+                                    <div class="col-xs-8">
                                         <input type="text" class="form-control" v-model="route.Product_Name" placeholder="Enter Route Name" required />
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="form-group">
                                     <label for="name" class="col-xs-4 control-label no-padding-right">Name </label>
                                     <div class="col-xs-8">
@@ -271,31 +271,25 @@
                                 <div class="form-group">
                                     <label for="pnr_no" class="col-xs-4 control-label no-padding-right">PNR NO</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="pnr_no" class="form-control" v-model="route.pnr_no" autocomplete="off"/>
+                                        <input type="text" id="pnr_no" class="form-control" v-model="route.pnr_no" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="flight_no" class="col-xs-4 control-label no-padding-right">Flight NO</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="flight_no" class="form-control" v-model="route.flight_no" autocomplete="off"/>
+                                        <input type="text" id="flight_no" class="form-control" v-model="route.flight_no" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="supplier_fair" class="col-xs-4 control-label no-padding-right no-padding-right">Supplier Fair</label>
+                                    <label for="supplier_fare" class="col-xs-4 control-label no-padding-right no-padding-right">Supplier Fare</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="supplier_fair" class="form-control" v-model="route.Product_Purchase_Rate" required autocomplete="off"/>
+                                        <input type="text" id="supplier_fare" class="form-control" v-model="route.Product_Purchase_Rate" required autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="supplier_tax" class="col-xs-4 control-label no-padding-right no-padding-right">Supplier Tax</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="supplier_tax" class="form-control" v-model="route.supplier_tax" autocomplete="off"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="sales_amount" class="col-xs-4 control-label no-padding-right">Sale Amount</label>
-                                    <div class="col-xs-8">
-                                        <input type="text" id="sales_amount" class="form-control" v-model="route.Product_SellingPrice" required autocomplete="off"/>
+                                        <input type="text" id="supplier_tax" class="form-control" v-model="route.supplier_tax" autocomplete="off" />
                                     </div>
                                 </div>
                             </div>
@@ -303,14 +297,21 @@
                                 <div class="form-group">
                                     <label for="ticket_no" class="col-xs-4 control-label no-padding-right">Ticket No</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="ticket_no" class="form-control" v-model="route.ticket" required autocomplete="off"/>
+                                        <input type="text" id="ticket_no" class="form-control" v-model="route.ticket" required autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sales_amount" class="col-xs-4 control-label no-padding-right">Sale Amount</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" id="sales_amount" class="form-control" v-model="route.Product_SellingPrice" required autocomplete="off" />
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tax" class="col-xs-4 control-label no-padding-right">Tax In BDT</label>
                                     <div class="col-xs-8">
-                                        <input type="text" id="tax" class="form-control" v-model="route.tax_amount" autocomplete="off"/>
+                                        <input type="text" id="tax" class="form-control" v-model="route.tax_amount" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -318,11 +319,11 @@
                                     <div class="col-xs-8">
                                         <div class="row">
                                             <div class="col-xs-4">
-                                                <input type="number" min="0" id="routeDiscount" class="form-control" v-model="routeDiscount" v-on:input="calculateDiscount" autocomplete="off"/>
+                                                <input type="number" min="0" id="routeDiscount" class="form-control" v-model="routeDiscount" v-on:input="calculateDiscount" autocomplete="off" />
                                             </div>
                                             <label class="col-xs-2 control-label">%</label>
                                             <div class="col-xs-6">
-                                                <input type="number" min="0" id="discount" class="form-control" v-model="route.discount" v-on:input="calculateDiscount" autocomplete="off"/>
+                                                <input type="number" min="0" id="discount" class="form-control" v-model="route.discount" v-on:input="calculateDiscount" autocomplete="off" />
                                             </div>
                                         </div>
                                     </div>
@@ -402,7 +403,7 @@
                             <div class="form-group">
                                 <label for="service_amount" class="col-xs-4 control-label no-padding-right">Service Amount</label>
                                 <div class="col-xs-8">
-                                    <input type="number" min="0" step="0.01" id="service_amount" class="form-control" v-model="bill.service_amount" v-on:input="calculateTotal" autocomplete="off"/>
+                                    <input type="number" min="0" step="0.01" id="service_amount" class="form-control" v-model="bill.service_amount" v-on:input="calculateTotal" autocomplete="off" />
                                 </div>
                             </div>
                         </div>
@@ -653,25 +654,24 @@
                 if (airline == undefined) return;
                 let data = this.routes.filter(item => item.ProductCategory_ID == airline.ProductCategory_SlNo);
                 this.filterRoutes = data;
-                // this.filterRoutes.unshift({
-                //     Product_SlNo: 'R01',
-                //     Product_Name: 'New Route',
-                //     name: '',
-                //     phone: '',
-                //     // address: '',
-                //     route_id: '',
-                //     issue_date: '',
-                //     flight_date: '',
-                //     reminder_date: '',
-                //     return_date: '',
-                //     pnr_no: '',
-                //     ticket: '',
-                //     flight_no: '',
-                //     Product_Purchase_Rate: 0.00,
-                //     Product_SellingPrice: 0.00,
-                //     tax_amount: 0.00,
-                //     discount: 0.00
-                // })
+                this.filterRoutes.unshift({
+                    Product_SlNo: 'R01',
+                    Product_Name: 'New Route',
+                    name: '',
+                    phone: '',
+                    route_id: '',
+                    issue_date: '',
+                    flight_date: '',
+                    reminder_date: '',
+                    return_date: '',
+                    pnr_no: '',
+                    ticket: '',
+                    flight_no: '',
+                    Product_Purchase_Rate: 0.00,
+                    Product_SellingPrice: 0.00,
+                    tax_amount: 0.00,
+                    discount: 0.00
+                })
             }
         },
 
@@ -771,25 +771,25 @@
                 axios.get('/get_products').then(res => {
                     this.routes = res.data;
                     this.filterRoutes = res.data;
-                    // this.filterRoutes.unshift({
-                    //     Product_SlNo: 'R01',
-                    //     Product_Name: 'New Route',
-                    //     name: '',
-                    //     phone: '',
-                    //     // address: '',
-                    //     route_id: '',
-                    //     issue_date: '',
-                    //     flight_date: '',
-                    //     reminder_date: '',
-                    //     return_date: '',
-                    //     pnr_no: '',
-                    //     ticket: '',
-                    //     flight_no: '',
-                    //     Product_Purchase_Rate: 0.00,
-                    //     Product_SellingPrice: 0.00,
-                    //     tax_amount: 0.00,
-                    //     discount: 0.00
-                    // })
+                    this.filterRoutes.unshift({
+                        Product_SlNo: 'R01',
+                        Product_Name: 'New Route',
+                        name: '',
+                        phone: '',
+                        // address: '',
+                        route_id: '',
+                        issue_date: '',
+                        flight_date: '',
+                        reminder_date: '',
+                        return_date: '',
+                        pnr_no: '',
+                        ticket: '',
+                        flight_no: '',
+                        Product_Purchase_Rate: 0.00,
+                        Product_SellingPrice: 0.00,
+                        tax_amount: 0.00,
+                        discount: 0.00
+                    })
                 })
             },
 
@@ -810,25 +810,25 @@
                 }
 
                 let route = {
-                    routeId  : this.route.Product_SlNo,
+                    routeId: this.route.Product_SlNo,
                     routeName: this.route.Product_Name,
                     airlineId: this.airline.ProductCategory_SlNo,
-                    airline  : this.airline.ProductCategory_Name,
-                    name     : this.route.name,
-                    phone    : this.route.phone,
+                    airline: this.airline.ProductCategory_Name,
+                    name: this.route.name,
+                    phone: this.route.phone,
                     // address: this.route.address,
-                    issue_date   : this.route.issue_date,
-                    flight_date  : this.route.flight_date,
+                    issue_date: this.route.issue_date,
+                    flight_date: this.route.flight_date,
                     reminder_date: this.route.reminder_date,
-                    return_date  : this.route.return_date,
-                    pnr_no       : this.route.pnr_no,
-                    ticket       : this.route.ticket,
-                    flight_no    : this.route.flight_no,
-                    purRate      : this.route.Product_Purchase_Rate,
-                    saleRate     : this.route.Product_SellingPrice,
-                    taxAmount    : this.route.tax_amount,
-                    supplier_tax : this.route.supplier_tax,
-                    discount     : this.route.discount,
+                    return_date: this.route.return_date,
+                    pnr_no: this.route.pnr_no,
+                    ticket: this.route.ticket,
+                    flight_no: this.route.flight_no,
+                    purRate: this.route.Product_Purchase_Rate,
+                    saleRate: this.route.Product_SellingPrice,
+                    taxAmount: this.route.tax_amount,
+                    supplier_tax: this.route.supplier_tax,
+                    discount: this.route.discount,
                 }
 
                 let cartInd = this.cart.findIndex(r => r.pnr_no != route.pnr_no);
@@ -888,10 +888,14 @@
                 }
 
                 if (event.target.id == 'discountPercent') {
-                    let total = this.cart.reduce((acc, pre) => {return acc + +pre.saleRate}, 0);
+                    let total = this.cart.reduce((acc, pre) => {
+                        return acc + +pre.saleRate
+                    }, 0);
                     this.bill.discount = ((parseFloat(total) * parseFloat(this.discountPercent)) / 100).toFixed(2);
                 } else {
-                    let total = this.cart.reduce((acc, pre) => {return acc + +pre.saleRate}, 0);
+                    let total = this.cart.reduce((acc, pre) => {
+                        return acc + +pre.saleRate
+                    }, 0);
                     this.discountPercent = (parseFloat(this.bill.discount) / parseFloat(total) * 100).toFixed(2);
                 }
 
