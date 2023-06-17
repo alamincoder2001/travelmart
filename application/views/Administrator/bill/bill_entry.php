@@ -323,7 +323,7 @@
                                             </div>
                                             <label class="col-xs-2 control-label">%</label>
                                             <div class="col-xs-6">
-                                                <input type="number" min="0" id="discount" class="form-control" v-model="route.discount" v-on:input="calculateDiscount" autocomplete="off" />
+                                                <input type="number" step="0.01" min="0" id="discount" class="form-control" v-model="route.discount" v-on:input="calculateDiscount" autocomplete="off" />
                                             </div>
                                         </div>
                                     </div>
@@ -368,7 +368,10 @@
                                         <td>{{ item.saleRate }}</td>
                                         <td>{{ item.taxAmount }}</td>
                                         <td>{{ item.discount }}</td>
-                                        <td><a href="" v-on:click.prevent="removeFromCart(sl)"><i class="fa fa-trash"></i></a></td>
+                                        <td>
+                                            <a href="" v-on:click.prevent="editCart(sl)"><i class="fa fa-edit"></i></a>
+                                            <a href="" v-on:click.prevent="removeFromCart(sl)"><i class="fa fa-trash"></i></a>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="10"></td>
@@ -644,6 +647,8 @@
                 },
 
                 cart: [],
+                cartEdit: '',
+                cartEditSl: '',
                 bill_due_on_update: 0.00,
                 OnProgress: false,
             }
@@ -816,7 +821,6 @@
                     airline: this.airline.ProductCategory_Name,
                     name: this.route.name,
                     phone: this.route.phone,
-                    // address: this.route.address,
                     issue_date: this.route.issue_date,
                     flight_date: this.route.flight_date,
                     reminder_date: this.route.reminder_date,
@@ -831,16 +835,51 @@
                     discount: this.route.discount,
                 }
 
-                let cartInd = this.cart.findIndex(r => r.pnr_no != route.pnr_no);
-                if (cartInd > -1) {
-                    alert('PNR number dose not match!');
-                    return;
+                if (this.cartEdit == "edit") {
+                    this.cart.splice(this.cartEditSl, 1);
+                    this.cartEdit = '';
+                    this.cartEditSl = '';
                 }
+                // let cartInd = this.cart.findIndex(r => r.pnr_no != route.pnr_no);
+                // if (cartInd > -1) {
+                //     alert('PNR number dose not match!');
+                //     return;
+                // }
 
                 this.cart.push(route);
-                this.clearCart();
+                // this.clearCart();
                 this.calculateTotal();
 
+            },
+
+            editCart(sl) {
+                let pro = this.cart[sl];
+                this.cartEdit = 'edit';
+                this.cartEditSl = sl;
+
+                this.route = {
+                    Product_SlNo: pro.routeId,
+                    Product_Name: pro.routeName,
+                    route_id: pro.airlineId,
+                    name: pro.name,
+                    phone: pro.phone,
+                    issue_date: pro.issue_date,
+                    flight_date: pro.flight_date,
+                    reminder_date: pro.reminder_date,
+                    return_date: pro.return_date,
+                    pnr_no: pro.pnr_no,
+                    ticket: pro.ticket,
+                    flight_no: pro.flight_no,
+                    Product_Purchase_Rate: pro.purRate,
+                    Product_SellingPrice: pro.saleRate,
+                    tax_amount: pro.taxAmount,
+                    supplier_tax: pro.supplier_tax,
+                    discount: pro.discount
+                };
+                this.airline = {
+                    ProductCategory_SlNo: pro.airlineId,
+                    ProductCategory_Name: pro.airline
+                }
             },
 
             removeFromCart(ind) {
@@ -850,10 +889,10 @@
 
             clearCart() {
                 // this.route.pnr_no = '';
-                this.route.ticket = '';
-                this.routeDiscount = 0.00;
-                this.route.discount = 0.00;
-                this.route.tax_amount = 0.00;
+                // this.route.ticket = '';
+                // this.routeDiscount = 0.00;
+                // this.route.discount = 0.00;
+                // this.route.tax_amount = 0.00;
             },
 
             calculateDiscount() {

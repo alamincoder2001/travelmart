@@ -102,7 +102,7 @@
 					<v-select v-bind:options="pnrs" v-model="pnr" label="pnr_no"></v-select>
 				</div>
 
-				<div class="form-group" v-bind:style="{display: searchTypesForRecord.includes(searchType) ? '' : 'none'}">
+				<div class="form-group" v-bind:style="{display: searchTypesForRecord.includes(searchType) || searchTypesForSupCus.includes(searchType)? '' : 'none'}">
 					<label>Record Type</label>
 					<select class="form-control" v-model="recordType" @change="bills = []">
 						<option value="without_details">Without Details</option>
@@ -217,6 +217,97 @@
 						</template>
 					</tbody>
 				</table>
+				<table 
+					class="record-table" 
+					v-if="(searchTypesForSupCus.includes(searchType)) && recordType == 'with_details'" 
+					style="display:none" 
+					v-bind:style="{display: (searchTypesForSupCus.includes(searchType)) && recordType == 'with_details' ? '' : 'none'}"
+					>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Invoice No.</th>
+							<th v-if="searchType == 'client'">Client Name</th>
+							<th v-if="searchType == 'supplier'">Supplier Name</th>
+							<th>Airline</th>
+							<th>Route</th>
+							<th>PNR No</th>
+							<th>Ticket No</th>
+							<th>Name</th>
+							<th>Reminder Number</th>
+							<th>Issue Date</th>
+							<th>Flight Date</th>
+							<th>Return Date</th>
+							<th v-if="searchType == 'supplier'">Supplier Tax</th>
+							<th v-if="searchType == 'supplier'">Price</th>
+							<th v-if="searchType == 'client'">Customer Tax</th>
+							<th v-if="searchType == 'client'">Price</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<template v-for="bill in bills">
+							<tr>
+								<td>{{ bill.date }}</td>
+								<td>{{ bill.invoice }}</td>
+								<td v-if="searchType == 'client'">{{ bill.Customer_Name }}</td>
+								<td v-if="searchType == 'supplier'">{{ bill.Supplier_Name }}</td>
+								<td>{{ bill.billDetails[0].ProductCategory_Name }}</td>
+								<td>{{ bill.billDetails[0].Product_Name }}</td>
+								<td>{{ bill.billDetails[0].pnr_no }}</td>
+								<td>{{ bill.billDetails[0].ticket }}</td>
+								<td>{{ bill.billDetails[0].name }}</td>
+								<td style="text-align:center;">{{ bill.billDetails[0].phone }}</td>
+								<td>{{ bill.billDetails[0].issue_date }}</td>
+								<td>{{ bill.billDetails[0].flight_date }}</td>
+								<td>{{ bill.billDetails[0].return_date }}</td>
+								<td v-if="searchType == 'supplier'" style="text-align:right;">{{ bill.billDetails[0].supplier_tax }}</td>
+								<td v-if="searchType == 'supplier'" style="text-align:right;">{{ bill.billDetails[0].purchase_rate }}</td>
+								<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.billDetails[0].tax_amount }}</td>
+								<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.billDetails[0].sale_rate }}</td>
+								<td style="text-align:center;">
+									<a href="" title="Bill Invoice" v-bind:href="`/bill-invoice-print/${bill.id}`" target="_blank"><i class="fa fa-file"></i></a>
+									<?php if($this->session->userdata('accountType') != 'u'){?>
+									<a v-bind:href="`/bill-edit/${bill.id}`" title="Edit Bill"><i class="fa fa-edit"></i></a>
+									<a href="" title="Delete Bill" @click.prevent="deleteBill(bill.id)"><i class="fa fa-trash"></i></a>
+									<?php }?>
+								</td>
+							</tr>
+							<tr v-for="(product, sl) in bill.billDetails.slice(1)">
+								<td colspan="3" v-bind:rowspan="bill.billDetails.length - 1" v-if="sl == 0"></td>
+								<td>{{ product.ProductCategory_Name }}</td>
+								<td>{{ product.Product_Name }}</td>
+								<td>{{ product.pnr_no }}</td>
+								<td>{{ product.ticket }}</td>
+								<td>{{ product.name }}</td>
+								<td style="text-align:center;">{{ product.phone }}</td>
+								<td>{{ product.issue_date }}</td>
+								<td>{{ product.flight_date }}</td>
+								<td>{{ product.return_date }}</td>
+								<td v-if="searchType == 'supplier'" style="text-align:right;">{{ product.supplier_tax }}</td>
+								<td v-if="searchType == 'supplier'" style="text-align:right;">{{ product.purchase_rate }}</td>
+								<td v-if="searchType == 'client'" style="text-align:right;">{{ product.tax_amount }}</td>
+								<td v-if="searchType == 'client'" style="text-align:right;">{{ product.sale_rate }}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td colspan="4"></td>
+								<td colspan="8"><strong>Other Service: </strong>{{ bill.other_service ?? '-' }}</td>
+								<td colspan="2" style="text-align:right;">{{ bill.service_amount }}</td>
+								<td></td>
+							</tr>
+							<tr style="font-weight:bold;">
+								<td colspan="12" style="font-weight:normal;"><strong>Note: </strong>{{ bill.note }}</td>
+								<td style="text-align:right;" colspan="2">
+									Total: {{ searchType == 'client' ? bill.total : bill.billDetails.reduce((acc, pre) => {return acc + +parseFloat(pre.purchase_rate)+ +parseFloat(pre.supplier_tax)},0).toFixed(2) }}<br>
+									{{ searchType == 'client' ? 'Paid: '+bill.paid : '' }}<br>
+									{{ searchType == 'client' ? 'Due: '+bill.due : '' }}
+								</td>
+								<td></td>
+							</tr>
+						</template>
+					</tbody>
+				</table>
 
 				<table 
 					class="record-table" 
@@ -232,7 +323,6 @@
 							<th>Supplier Name</th>
 							<th>Saved By</th>
 							<th>Sub Total</th>
-							<!-- <th>VAT</th> -->
 							<th>Discount</th>
 							<th>Service Cost</th>
 							<th>Total</th>
@@ -250,7 +340,6 @@
 							<td>{{ bill.Supplier_Name }}</td>
 							<td>{{ bill.added_by }}</td>
 							<td style="text-align:right;">{{ bill.sub_total }}</td>
-							<!-- <td style="text-align:right;">{{ bill.vat }}</td> -->
 							<td style="text-align:right;">{{ bill.discount }}</td>
 							<td style="text-align:right;">{{ bill.service_amount }}</td>
 							<td style="text-align:right;">{{ bill.total }}</td>
@@ -270,7 +359,6 @@
 						<tr style="font-weight:bold;">
 							<td colspan="5" style="text-align:right;">Total</td>
 							<td style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.sub_total)}, 0)).toFixed(2) }}</td>
-							<!-- <td style="text-align:right;">{{ bills.reduce((prev, curr)=>{return prev + parseFloat(curr.vat)}, 0) }}</td> -->
 							<td style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.discount)}, 0)).toFixed(2) }}</td>
 							<td style="text-align:right;">{{ (bills.reduce((prev, curr)=>{return prev + parseFloat(curr.service_amount)}, 0)).toFixed(2) }}</td>
 							<td style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.total)}, 0)).toFixed(2) }}</td>
@@ -281,23 +369,25 @@
 						</tr>
 					</tfoot>
 				</table>
-				
 				<table 
 					class="record-table" 
-					v-if="(searchTypesForSupplier.includes(searchType)) && recordType == 'without_details'" 
+					v-if="(searchTypesForSupCus.includes(searchType)) && recordType == 'without_details'" 
 					style="display:none" 
-					v-bind:style="{display: (searchTypesForSupplier.includes(searchType)) && recordType == 'without_details' ? '' : 'none'}"
+					v-bind:style="{display: (searchTypesForSupCus.includes(searchType)) && recordType == 'without_details' ? '' : 'none'}"
 					>
 					<thead>
 						<tr>
 							<th>Date</th>
 							<th>Invoice No.</th>
-							<th>Client Name</th>
-							<th>Supplier Name</th>
+							<th v-if="searchType == 'client'">Client Name</th>
+							<th v-if="searchType == 'supplier'">Supplier Name</th>
 							<th>Saved By</th>
-							<th>Purchase Total</th>
-							<th>Paid</th>
-							<th>Due</th>
+							<th v-if="searchType == 'client'">Sub Total</th>
+							<th v-if="searchType == 'client'">Discount</th>
+							<th v-if="searchType == 'client'">Service Cost</th>
+							<th>Total</th>
+							<th v-if="searchType == 'client'">Paid</th>
+							<th v-if="searchType == 'client'">Due</th>
 							<th>Note</th>
 							<th>Action</th>
 						</tr>
@@ -306,15 +396,19 @@
 						<tr v-for="bill in bills">
 							<td>{{ bill.date }}</td>
 							<td>{{ bill.invoice }}</td>
-							<td>{{ bill.Customer_Name }}</td>
-							<td>{{ bill.Supplier_Name }}</td>
+							<td v-if="searchType == 'client'">{{ bill.Customer_Name }}</td>
+							<td v-if="searchType == 'supplier'">{{ bill.Supplier_Name }}</td>
 							<td>{{ bill.added_by }}</td>
-							<td style="text-align:right;">{{ bill.purchase_total }}</td>
-							<td style="text-align:right;">0.00</td>
-							<td style="text-align:right;">{{ bill.purchase_total }}</td>
+							<td v-if="searchType == 'supplier'" style="text-align:right;">{{bill.purchase_total}}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.sub_total }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.discount }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.service_amount }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.total }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.paid }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.due }}</td>
 							<td style="text-align:left;">{{ bill.note }}</td>
 							<td style="text-align:center;">
-								<!-- <a href="" title="Bill Invoice" v-bind:href="`/bill-invoice-print/${bill.id}`" target="_blank"><i class="fa fa-file"></i></a> -->
+								<a href="" title="Bill Invoice" v-bind:href="`/bill-invoice-print/${bill.id}`" target="_blank"><i class="fa fa-file"></i></a>
 								<?php if($this->session->userdata('accountType') != 'u'){?>
 								<a v-bind:href="`/bill-edit/${bill.id}`" title="Edit Bill"><i class="fa fa-edit"></i></a>
 								<a href="" title="Delete Bill" @click.prevent="deleteBill(bill.id)"><i class="fa fa-trash"></i></a>
@@ -324,15 +418,20 @@
 					</tbody>
 					<tfoot>
 						<tr style="font-weight:bold;">
-							<td colspan="5" style="text-align:right;">Total</td>
-							<td style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.purchase_total)}, 0)).toFixed(2) }}</td>
-							<td style="text-align:right;">0.00</td>
-							<td style="text-align:right;">{{ (bills.reduce((prev, curr)=>{return prev + parseFloat(curr.purchase_total)}, 0)).toFixed(2) }}</td>
+							<td colspan="4" style="text-align:right;">Total</td>
+							<td v-if="searchType == 'supplier'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.purchase_total)}, 0)).toFixed(2) }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.sub_total)}, 0)).toFixed(2) }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.discount)}, 0)).toFixed(2) }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ (bills.reduce((prev, curr)=>{return prev + parseFloat(curr.service_amount)}, 0)).toFixed(2) }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.total)}, 0)).toFixed(2) }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.paid)}, 0)).toFixed(2) }}</td>
+							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.due)}, 0)).toFixed(2) }}</td>
 							<td></td>
 							<td></td>
 						</tr>
 					</tfoot>
 				</table>
+
 
 				<template
 					v-if="searchTypesForDetails.includes(searchType)"  
@@ -431,8 +530,8 @@
 				pnrs: [],
 
                 bills: [],
-				searchTypesForRecord: ['', 'user', 'client'],
-				searchTypesForSupplier: ['supplier'],
+				searchTypesForRecord: ['', 'user'],
+				searchTypesForSupCus: ['client','supplier'],
 				searchTypesForDetails: ['airline', 'route', 'pnr']
             }
         },
@@ -517,7 +616,7 @@
 					this.pnr = null;
 				}
 
-				if(this.searchTypesForRecord.includes(this.searchType) || this.searchTypesForSupplier.includes(this.searchType)){
+				if(this.searchTypesForRecord.includes(this.searchType) || this.searchTypesForSupCus.includes(this.searchType)){
 					this.getBillRecord();
 				} else {
 					this.getBillDetails();
