@@ -258,7 +258,7 @@
                                 <div class="form-group">
                                     <label for="return_date" class="col-xs-4 control-label no-padding-right">Return Date</label>
                                     <div class="col-xs-8">
-                                        <input type="date" id="return_date" class="form-control" v-model="route.return_date" required />
+                                        <input type="date" id="return_date" class="form-control" v-model="route.return_date" />
                                     </div>
                                 </div>
                             </div>
@@ -675,6 +675,7 @@
                     Product_Purchase_Rate: 0.00,
                     Product_SellingPrice: 0.00,
                     tax_amount: 0.00,
+                    supplier_tax: 0.00,
                     discount: 0.00
                 })
             }
@@ -793,6 +794,7 @@
                         Product_Purchase_Rate: 0.00,
                         Product_SellingPrice: 0.00,
                         tax_amount: 0.00,
+                        supplier_tax: 0.00,
                         discount: 0.00
                     })
                 })
