@@ -649,6 +649,12 @@ class Model_Table extends CI_Model{
                 " . ($date == null ? "" : " and sm.SaleMaster_SaleDate < '$date'") . "
                 and sm.Status = 'a') as billAmount,
 
+            (select ifnull(sum(bm.total), 0.00)
+                from tbl_billmaster bm 
+                where bm.client_id = c.Customer_SlNo
+                " . ($date == null ? "" : " and bm.date < '$date'") . "
+                and bm.status = 'a') as billPaid,
+
             (select ifnull(sum(sm.SaleMaster_PaidAmount), 0.00)
                 from tbl_salesmaster sm
                 where sm.SalseCustomer_IDNo = c.Customer_SlNo
@@ -678,7 +684,7 @@ class Model_Table extends CI_Model{
 
             (select invoicePaid + cashReceived) as paidAmount,
 
-            (select (billAmount + paidOutAmount) - (paidAmount + returnedAmount)) as dueAmount
+            (select (billAmount + billPaid + paidOutAmount) - (paidAmount + returnedAmount)) as dueAmount
             
             from tbl_customer c
             where c.Customer_brunchid = '$branchId' $clauses
