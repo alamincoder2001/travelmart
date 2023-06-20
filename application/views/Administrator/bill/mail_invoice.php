@@ -210,12 +210,15 @@
                                                 <thead>
                                                     <tr>
                                                         <td>SL</td>
+                                                        <td>PNR NO</td>
+                                                        <td>Ticket</td>
                                                         <td>Name</td>
                                                         <td>Airline</td>
                                                         <td>Route</td>
-                                                        <td>PNR NO</td>
-                                                        <td>Ticket</td>
                                                         <td>Fare</td>
+                                                        <td>Discount</td>
+                                                        <td>Tax</td>
+                                                        <td>Total</td>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -224,12 +227,18 @@
                                                     ?>
                                                         <tr>
                                                             <td><?php echo $key + 1 ?></td>
+                                                            <td><?php echo $value->pnr_no ?></td>
+                                                            <td><?php echo $value->ticket ?></td>
                                                             <td><?php echo $value->name ?></td>
                                                             <td><?php echo $value->ProductCategory_Name ?></td>
                                                             <td><?php echo $value->Product_Name ?></td>
-                                                            <td><?php echo $value->pnr_no ?></td>
-                                                            <td><?php echo $value->ticket ?></td>
-                                                            <td align="right"><?php echo $value->sale_rate ?></td>
+                                                            <td><?php echo $value->sale_rate ?></td>
+                                                            <td><?php echo $value->discount ?></td>
+                                                            <td><?php echo $value->tax_amount ?></td>
+                                                            <?php
+                                                            $total = ($value->sale_rate + $value->tax_amount) - $value->discount;
+                                                            ?>
+                                                            <td><?php echo $total ?></td>
                                                         </tr>
                                                     <?php } ?>
                                                     <?php
@@ -297,9 +306,13 @@
                                             </div>
                                             <div class="col-xs-6" style="float: right;">
                                                 <table _t92sadbc2>
-                                                    <tr>
+                                                    <!-- <tr>
                                                         <td><strong>Tax Amount:</strong></td>
                                                         <td style="text-align:right"><?php echo array_sum(array_column($billDetails, 'tax_amount')); ?></td>
+                                                    </tr> -->
+                                                    <tr>
+                                                        <td><strong>SubTotal BDT:</strong></td>
+                                                        <td style="text-align:right"><?php echo $bills->sub_total; ?></td>
                                                     </tr>
                                                     <tr>
                                                         <td><strong>Discount:</strong></td>
@@ -354,7 +367,7 @@
                 Thank you for your kind Co-operation
             </div>
             <div class="col-xs-12" style="padding-top: 70px;padding-bottom:8px;">
-                <img src="<?php echo $sillImage; ?>" width="150px" alt="Sill"/>
+                <img src="<?php echo $sillImage; ?>" width="150px" alt="Sill" />
             </div>
             <div class="col-xs-12">
                 Shahidul Islam Babu, Chief Executive Officer, Travel Mart USA.
