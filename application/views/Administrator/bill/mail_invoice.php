@@ -155,6 +155,8 @@
                             <?php
                             $image = 'uploads/company_profile_thum/travel-mart.jpeg';
                             $img = 'data:image;base64,' . base64_encode(@file_get_contents($image));
+                            $sill = 'uploads/sill.jpeg';
+                            $sillImage = 'data:image;base64,' . base64_encode(@file_get_contents($sill));
                             ?>
                             <div class="col-xs-12" style="margin-bottom: 5px;">
                                 <img src="<?php echo $img; ?>" alt="Logo" style="width:100%;" />
@@ -352,7 +354,7 @@
                 Thank you for your kind Co-operation
             </div>
             <div class="col-xs-12" style="padding-top: 70px;padding-bottom:8px;">
-                <img src="/uploads/sill.jpeg" width="150px" />
+                <img src="<?php echo $sillImage; ?>" width="150px" alt="Sill"/>
             </div>
             <div class="col-xs-12">
                 Shahidul Islam Babu, Chief Executive Officer, Travel Mart USA.
