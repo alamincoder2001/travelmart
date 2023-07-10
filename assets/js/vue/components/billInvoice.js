@@ -88,7 +88,7 @@ const billInvoice = Vue.component("bill-invoice", {
 
                 <div class="row">
                     <div class="col-xs-6">
-                        <div style="margin-top: 10px;">
+                        <div style="margin-top: 10px; display: none;">
                             <table class="pull-left">
                                 <tr>
                                     <td><strong>Previous Due</strong></td>
