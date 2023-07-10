@@ -196,6 +196,8 @@
 								<td>{{ product.issue_date }}</td>
 								<td>{{ product.flight_date }}</td>
 								<td>{{ product.return_date }}</td>
+								<td style="text-align:right;">{{ product.supplier_tax }}</td>
+								<td style="text-align:right;">{{ product.tax_amount }}</td>
 								<td style="text-align:right;">{{ product.sale_rate }}</td>
 								<td></td>
 							</tr>
@@ -321,6 +323,7 @@
 							<th>Invoice No.</th>
 							<th>Client Name</th>
 							<th>Supplier Name</th>
+							<th>PNR No.</th>
 							<th>Saved By</th>
 							<th>Sub Total</th>
 							<th>Discount</th>
@@ -338,6 +341,7 @@
 							<td>{{ bill.invoice }}</td>
 							<td>{{ bill.Customer_Name }}</td>
 							<td>{{ bill.Supplier_Name }}</td>
+							<td>{{ bill.pnr_no }}</td>
 							<td>{{ bill.added_by }}</td>
 							<td style="text-align:right;">{{ bill.sub_total }}</td>
 							<td style="text-align:right;">{{ bill.discount }}</td>
@@ -357,7 +361,7 @@
 					</tbody>
 					<tfoot>
 						<tr style="font-weight:bold;">
-							<td colspan="5" style="text-align:right;">Total</td>
+							<td colspan="6" style="text-align:right;">Total</td>
 							<td style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.sub_total)}, 0)).toFixed(2) }}</td>
 							<td style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.discount)}, 0)).toFixed(2) }}</td>
 							<td style="text-align:right;">{{ (bills.reduce((prev, curr)=>{return prev + parseFloat(curr.service_amount)}, 0)).toFixed(2) }}</td>
@@ -381,6 +385,7 @@
 							<th>Invoice No.</th>
 							<th v-if="searchType == 'client'">Client Name</th>
 							<th v-if="searchType == 'supplier'">Supplier Name</th>
+							<th>PNR No.</th>
 							<th>Saved By</th>
 							<th v-if="searchType == 'client'">Sub Total</th>
 							<th v-if="searchType == 'client'">Discount</th>
@@ -398,6 +403,7 @@
 							<td>{{ bill.invoice }}</td>
 							<td v-if="searchType == 'client'">{{ bill.Customer_Name }}</td>
 							<td v-if="searchType == 'supplier'">{{ bill.Supplier_Name }}</td>
+							<td>{{ bill.pnr_no }}</td>
 							<td>{{ bill.added_by }}</td>
 							<td v-if="searchType == 'supplier'" style="text-align:right;">{{bill.purchase_total}}</td>
 							<td v-if="searchType == 'client'" style="text-align:right;">{{ bill.sub_total }}</td>
@@ -418,7 +424,7 @@
 					</tbody>
 					<tfoot>
 						<tr style="font-weight:bold;">
-							<td colspan="4" style="text-align:right;">Total</td>
+							<td colspan="5" style="text-align:right;">Total</td>
 							<td v-if="searchType == 'supplier'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.purchase_total)}, 0)).toFixed(2) }}</td>
 							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.sub_total)}, 0)).toFixed(2) }}</td>
 							<td v-if="searchType == 'client'" style="text-align:right;">{{ parseFloat(bills.reduce((prev, curr)=>{return prev + parseFloat(curr.discount)}, 0)).toFixed(2) }}</td>

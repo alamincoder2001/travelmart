@@ -538,7 +538,7 @@ class BillController extends CI_Controller
 
 
         if(isset($data->billId) && $data->billId != 0 && $data->billId != ''){
-            $clauses .= " and id = '$data->billId'";
+            $clauses .= " and bm.id = '$data->billId'";
             $billDetails = $this->db->query("
                 select 
                     bd.*,
@@ -567,14 +567,17 @@ class BillController extends CI_Controller
 				s.Supplier_Name,
                 s.Supplier_Mobile,
                 s.Supplier_Address,
-				br.Brunch_name
+				br.Brunch_name,
+                bd.pnr_no
             from tbl_billmaster bm
             left join tbl_customer c on c.Customer_SlNo = bm.client_id
             left join tbl_supplier s on s.Supplier_SlNo = bm.supplier_id
             left join tbl_brunch br on br.brunch_id = bm.branch_id
+            left join tbl_billdetails bd on bd.billmaster_id = bm.id
             where bm.branch_id = '$branchId'
             and bm.status = 'a'
             $clauses
+            group by bm.invoice
             order by bm.date asc
         ")->result();
         
