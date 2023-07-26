@@ -494,7 +494,7 @@ const billInvoice = Vue.component("bill-invoice", {
                                 <thead>
                                     <tr>
                                         <td>
-                                            <div style="height:140px;">
+                                            <div style="height:145px;">
                                             </div>
                                         </td>
                                     </tr>
