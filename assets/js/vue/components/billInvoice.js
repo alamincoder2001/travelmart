@@ -379,7 +379,7 @@ const billInvoice = Vue.component("bill-invoice", {
             (i == 3 && value != 0) ||
             (i == 2 && value != 0 && n_array[i + 1] == 0)
           ) {
-            words_string += "Lakhs ";
+            words_string += "Lac ";
           }
           if (
             (i == 5 && value != 0) ||
@@ -481,9 +481,9 @@ const billInvoice = Vue.component("bill-invoice", {
                             }
                         </style>
                     </head>
-                    <body>
+                    <body style="position:relative;">
                         <div class="container">
-                            <div style="width: 100%;position:fixed;top: 0;">
+                            <div style="width: 100%;position:absolute;top: 0;">
                                 <div class="row">
                                     <div class="col-xs-12" style="margin-bottom: 5px;">
                                         <img src="/uploads/company_profile_thum/travel-mart.jpeg" alt="Logo" style="width:100%" />
@@ -511,11 +511,11 @@ const billInvoice = Vue.component("bill-invoice", {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="row" style="padding-bottom:6px;">
+                                            <div class="row">
                                                 <div class="col-xs-12">
                                                     Thank you for your kind Co-operation
                                                 </div>
-                                                <div class="col-xs-12" style="padding-top: 40px;padding-bottom:8px;">
+                                                <div class="col-xs-12" style="padding-top: 10px;">
                                                     <img src="/uploads/sill.jpeg" width="150px" />
                                                 </div>
                                                 <div class="col-xs-12">
@@ -528,7 +528,7 @@ const billInvoice = Vue.component("bill-invoice", {
                                 <tfoot>
                                     <tr>
                                         <td>
-                                            <div style="height:100px;"></div>
+                                            <div style="height:40px;"></div>
                                         </td>
                                     </tr>
                                 </tfoot>
