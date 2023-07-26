@@ -132,7 +132,7 @@ const billInvoice = Vue.component("bill-invoice", {
                         </div>
                     </div>
                     <div class="col-xs-6">
-                        <table _t92sadbc2>
+                        <table _t92sadbc2 style="margin-top:15px;">
                             <tr style="display:none;">
                                 <td><strong>VAT:</strong></td>
                                 <td style="text-align:right">{{ bills.vat }}</td>
@@ -483,14 +483,18 @@ const billInvoice = Vue.component("bill-invoice", {
                     </head>
                     <body>
                         <div class="container">
+                            <div style="width: 100%;position:fixed;top: 0;">
+                                <div class="row">
+                                    <div class="col-xs-12" style="margin-bottom: 5px;">
+                                        <img src="/uploads/company_profile_thum/travel-mart.jpeg" alt="Logo" style="width:100%" />
+                                    </div>
+                                </div>
+                            </div>
                             <table style="width:100%;">
                                 <thead>
                                     <tr>
                                         <td>
-                                            <div class="row">
-                                                <div class="col-xs-12" style="margin-bottom: 5px;">
-                                                    <img src="/uploads/company_profile_thum/travel-mart.jpeg" alt="Logo" style="width:100%" />
-                                                </div>
+                                            <div style="height:160px;">
                                             </div>
                                         </td>
                                     </tr>
@@ -505,29 +509,33 @@ const billInvoice = Vue.component("bill-invoice", {
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="row" style="padding-bottom:6px;">
+                                                <div class="col-xs-12">
+                                                    Thank you for your kind Co-operation
+                                                </div>
+                                                <div class="col-xs-12" style="padding-top: 40px;padding-bottom:8px;">
+                                                    <img src="/uploads/sill.jpeg" width="150px" />
+                                                </div>
+                                                <div class="col-xs-12">
+                                                    Shahidul Islam Babu, Chief Executive Officer, Travel Mart USA.
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td>
-                                            <div style="width:100%;height:50px;">&nbsp;</div>
+                                            <div style="height:100px;"></div>
                                         </td>
                                     </tr>
                                 </tfoot>
                             </table>
-                            <div class="row" style="margin-bottom:5px; padding-bottom:6px;">
-                                <div class="col-xs-12">
-                                    Thank you for your kind Co-operation
-                                </div>
-                                <div class="col-xs-12" style="padding-top: 70px;padding-bottom:8px;">
-                                    <img src="/uploads/sill.jpeg" width="150px" />
-                                </div>
-                                <div class="col-xs-12">
-                                    Shahidul Islam Babu, Chief Executive Officer, Travel Mart USA.
-                                </div>
-                            </div>
-                            <div style="position:fixed;left:0;bottom:15px;width:100%;">
+                            <div style="width: 100%;position:fixed;bottom: 0;">
                                 <div class="row" style="text-align:center;">
-                                    <div class="col-xs-12"  style="font-size:14px; padding-bottom: 5px;">
+                                    <div class="col-xs-12"style="font-size:14px; padding-bottom: 5px;">
                                         This is a computer generated statement and dose not require any signature.
                                     </div>
                                     <div class="col-xs-12" style="border-top: 1px solid #ccc;font-size:11px;">
