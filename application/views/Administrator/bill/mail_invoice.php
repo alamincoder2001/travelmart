@@ -25,8 +25,8 @@
             font-size: 15px;
             margin-bottom: 15px;
             padding: 5px;
-            border-top: 1px dotted #454545;
-            border-bottom: 1px dotted #454545;
+            /* border-top: 1px dotted #454545;
+            border-bottom: 1px dotted #454545; */
             text-align: center;
         }
 
