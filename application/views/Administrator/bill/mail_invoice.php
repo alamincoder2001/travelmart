@@ -147,21 +147,24 @@
 
 <body>
     <div class="container">
+        <div style="width: 100%;position:absolute;top: 0;">
+            <div class="row">
+                <?php
+                $image = 'uploads/company_profile_thum/travel-mart.jpeg';
+                $img = 'data:image;base64,' . base64_encode(@file_get_contents($image));
+                $sill = 'uploads/sill.jpeg';
+                $sillImage = 'data:image;base64,' . base64_encode(@file_get_contents($sill));
+                ?>
+                <div class="col-xs-12" style="margin-bottom: 5px;">
+                    <img src="<?php echo $img; ?>" alt="Logo" style="width:100%;" />
+                </div>
+            </div>
+        </div>
         <table style="width: 100%;">
             <thead>
                 <tr>
                     <td>
-                        <div class="row" style="text-align: center;">
-                            <?php
-                            $image = 'uploads/company_profile_thum/travel-mart.jpeg';
-                            $img = 'data:image;base64,' . base64_encode(@file_get_contents($image));
-                            $sill = 'uploads/sill.jpeg';
-                            $sillImage = 'data:image;base64,' . base64_encode(@file_get_contents($sill));
-                            ?>
-                            <div class="col-xs-12" style="margin-bottom: 5px;">
-                                <img src="<?php echo $img; ?>" alt="Logo" style="width:100%;" />
-                            </div>
-                        </div>
+                        <div style="height:145px;"></div>
                     </td>
                 </tr>
             </thead>
@@ -178,7 +181,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <table _a284de>
@@ -262,7 +264,7 @@
                                     <div class="row">
                                         <div class="flex-container">
                                             <div class="col-xs-6" style="float: left;">
-                                                <div style="margin-top: 10px;">
+                                                <div style="margin-top: 10px;display:none;">
                                                     <table>
                                                         <tr>
                                                             <td><strong>Previous Due</strong></td>
@@ -284,7 +286,8 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <div style="margin-top: 7px;">
+                                                <br><br><br>
+                                                <div style="margin-top: 10px;">
                                                     <table>
                                                         <tr>
                                                             <td><strong>Date of Issue</strong></td>
@@ -353,27 +356,31 @@
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                Thank you for your kind Co-operation
+                            </div>
+                            <div class="col-xs-12" style="padding-top: 10px;">
+                                <img src="<?php echo $sillImage; ?>" width="150px" alt="Sill" />
+                            </div>
+                            <div class="col-xs-12">
+                                Shahidul Islam Babu, Chief Executive Officer, Travel Mart USA.
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
             <tfoot>
                 <tr>
                     <td>
-                        <div style="width: 100%; height: 50px;">&nbsp;</div>
+                        <div style="width: 100%; height: 30px;"></div>
                     </td>
                 </tr>
             </tfoot>
         </table>
-        <div class="row" style=" padding-top: 20px; margin-bottom:5px; padding-bottom:6px;">
-            <div class="col-xs-12">
-                Thank you for your kind Co-operation
-            </div>
-            <div class="col-xs-12" style="padding-top: 70px;padding-bottom:8px;">
-                <img src="<?php echo $sillImage; ?>" width="150px" alt="Sill" />
-            </div>
-            <div class="col-xs-12">
-                Shahidul Islam Babu, Chief Executive Officer, Travel Mart USA.
-            </div>
-        </div>
-        <div style="position:fixed;left:0;bottom:15px;width:100%;">
+        <div style="width: 100%;position:fixed;bottom: 0;left:0;">
             <div class="row" style="text-align:center;">
                 <div class="col-xs-12" style="font-size:14px; padding-bottom: 5px;">
                     This is a computer generated statement and dose not require any signature.
