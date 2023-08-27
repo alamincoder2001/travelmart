@@ -318,7 +318,7 @@ class BillController extends CI_Controller
                     'issue_date'    => $cartItem->issue_date,
                     'flight_date'   => $cartItem->flight_date,
                     'reminder_date' => $cartItem->reminder_date ?? '',
-                    'return_date'   => $cartItem->return_date,
+                    'return_date'   => $cartItem->return_date ?? '',
                     'pnr_no'        => $cartItem->pnr_no ?? '',
                     'ticket'        => $cartItem->ticket,
                     'flight_no'     => $cartItem->flight_no,
@@ -417,24 +417,24 @@ class BillController extends CI_Controller
 
             // Bill master data update
 			$bill = array(
-				'date' =>  $data->bill->date,
-				'mr_no' => $data->bill->mr_no,
-				'client_id' => $clientId,
-				'supplier_id' => $supplierId,
-				'sub_total' => $data->bill->subTotal,
+				'date'           => $data->bill->date,
+				'mr_no'          => $data->bill->mr_no,
+				'client_id'      => $clientId,
+				'supplier_id'    => $supplierId,
+				'sub_total'      => $data->bill->subTotal,
 				'purchase_total' => $data->bill->purchase_total,
-				'vat' => $data->bill->vat,
-				'discount' => $data->bill->discount,
-				'total' => $data->bill->total,
-				'paid' => $data->bill->paid,
-				'due' => $data->bill->due,
-				'previous_due' => $data->bill->previous_due,
-				'note' => $data->bill->note,
-				'other_service' => $data->bill->other_service,
+				'vat'            => $data->bill->vat,
+				'discount'       => $data->bill->discount,
+				'total'          => $data->bill->total,
+				'paid'           => $data->bill->paid,
+				'due'            => $data->bill->due,
+				'previous_due'   => $data->bill->previous_due,
+				'note'           => $data->bill->note,
+				'other_service'  => $data->bill->other_service,
 				'service_amount' => $data->bill->service_amount,
-				'updated_by' => $this->session->userdata("FullName"),
-				'updated_time' => date('Y-m-d H:i:s'),
-				'branch_id' => $this->session->userdata('BRANCHid')
+				'updated_by'     => $this->session->userdata("FullName"),
+				'updated_time'   => date('Y-m-d H:i:s'),
+				'branch_id'      => $this->session->userdata('BRANCHid')
 			);
 
             $this->db->where('id', $billId);
@@ -474,7 +474,7 @@ class BillController extends CI_Controller
                     'issue_date' => $cartItem->issue_date,
                     'flight_date' => $cartItem->flight_date,
                     'reminder_date' => $cartItem->reminder_date ?? '',
-                    'return_date' => $cartItem->return_date,
+                    'return_date' => $cartItem->return_date ?? '',
                     'pnr_no' => $cartItem->pnr_no ?? '',
                     'ticket' => $cartItem->ticket,
                     'flight_no' => $cartItem->flight_no,

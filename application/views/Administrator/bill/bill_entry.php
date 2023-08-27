@@ -374,19 +374,28 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td colspan="5"></td>
+                                        <td>{{cart.reduce((acc, pre) => {return acc + +parseFloat(pre.purRate)},0).toFixed(2)}}</td>
+                                        <td>{{cart.reduce((acc, pre) => {return acc + +parseFloat(pre.supplier_tax)},0).toFixed(2)}}</td>
+                                        <td>{{cart.reduce((acc, pre) => {return acc + +parseFloat(pre.saleRate)},0).toFixed(2)}}</td>
+                                        <td>{{cart.reduce((acc, pre) => {return acc + +parseFloat(pre.taxAmount)},0).toFixed(2)}}</td>
+                                        <td>{{cart.reduce((acc, pre) => {return acc + +parseFloat(pre.discount)},0).toFixed(2)}}</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                         <td colspan="10"></td>
                                     </tr>
 
                                     <tr style="font-weight: bold;">
                                         <td colspan="5">Note</td>
-                                        <td colspan="3">Total Tax</td>
-                                        <td colspan="3">Total</td>
+                                        <td colspan="3">Supplier Total</td>
+                                        <td colspan="3">Customer Total</td>
                                     </tr>
 
                                     <tr>
                                         <td colspan="5"><textarea style="width: 100%;font-size:13px;" placeholder="Note" v-model="bill.note"></textarea></td>
-                                        <td colspan="3" style="padding-top: 15px;font-size:18px;">{{ cart.reduce((prev, curr) => { return prev + parseFloat(curr.taxAmount)}, 0) }} </td>
-                                        <td colspan="3" style="padding-top: 15px;font-size:18px;">{{ bill.total }}</td>
+                                        <td colspan="3" style="padding-top: 15px;font-size:18px;">{{cart.reduce((acc, pre) => {return acc + +parseFloat(pre.supplier_tax) + +parseFloat(pre.purRate)},0).toFixed(2)}} </td>
+                                        <td colspan="3" style="padding-top: 15px;font-size:18px;">{{ parseFloat(bill.total).toFixed(2) }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -907,7 +916,7 @@
 
             calculateTotal() {
                 this.bill.purchase_total = this.cart.reduce((prev, curr) => {
-                    return prev + parseFloat(curr.purRate)
+                    return prev + parseFloat(curr.purRate) + +parseFloat(curr.supplier_tax)
                 }, 0).toFixed(2);
 
                 let saleTotal = this.cart.reduce((prev, curr) => {
